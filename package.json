@@ -1,38 +1,57 @@
 {
-  "name": "masscode-assistant",
-  "displayName": "massCode assistant",
-  "description": "Fetch snippets from massCode app",
-  "version": "1.1.0",
-  "publisher": "AntonReshetov",
+  "name": "masscodepp",
+  "displayName": "massCode plusplus",
+  "description": "better masscode assistant",
+  "version": "1.0.0",
+  "publisher": "Zackary W",
   "engines": {
     "vscode": "^1.66.0"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [
-    "onCommand:masscode-assistant.search",
-    "onCommand:masscode-assistant.create"
-  ],
   "main": "./out/extension.js",
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "masscodepp-explorer",
+          "title": "massCodePP",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "masscodepp-explorer": [
+        {
+          "id": "masscodepp-snippets",
+          "name": "Snippets"
+        }
+      ]
+    },
     "commands": [
       {
-        "command": "masscode-assistant.search",
-        "title": "massCode: Search"
-      },
-      {
-        "command": "masscode-assistant.create",
-        "title": "massCode: Create Snippet"
+        "command": "masscodepp.refreshSnippets",
+        "title": "Refresh Snippets",
+        "icon": "$(refresh)"
       }
     ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "masscodepp.refreshSnippets",
+          "when": "view == masscodepp-snippets",
+          "group": "navigation"
+        }
+      ]
+    },
     "configuration": {
-      "title": "Search node_modules",
+      "title": "Masscode++",
       "properties": {
-        "masscode-assistant.notify": {
-          "type": "boolean",
-          "default": true,
-          "description": "Show notification"
+        "masscodepp.apiUrl": {
+          "type": "string",
+          "default": "http://localhost:3033",
+          "description": "API URL for Masscode++"
         }
       }
     }
@@ -40,7 +59,7 @@
   "icon": "assets/logo.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/massCodeIO/assistant-vscode"
+    "url": ""
   },
   "scripts": {
     "vscode:prepublish": "yarn run compile",
@@ -53,7 +72,7 @@
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^16.2.3",
+    "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^16.2.1",
     "@types/glob": "^7.2.0",
     "@types/mocha": "^9.1.0",
@@ -74,7 +93,7 @@
     "typescript": "^4.5.5"
   },
   "dependencies": {
-    "axios": "^0.27.1",
+    "axios": "^1.7.7",
     "strip-indent": "^4.0.0"
   }
 }
